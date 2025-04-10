@@ -2,13 +2,13 @@ POST http://localhost:2138/api/v1/complaints
 Content-Type: application/json
 
 {
-  "reporterName": "Jarekaasdfaasgddfdffgdf",
+  "reporterName": "Jareakaasdfaasgddfdffgdf",
   "complaintProductId": "d2f1e3ad-74e0-4d08-b1f7-3a7e20469efc",
   "contents": "dupajas"
 }
 
 ###
-PUT http://localhost:2138/api/v1/complaints/d2cfc938-5781-390e-b2af-621a86a35983
+PUT http://localhost:2138/api/v1/complaints/8f42cea5-3538-38d5-86de-8c0862bc5345
 Content-Type: application/json
 
 {
