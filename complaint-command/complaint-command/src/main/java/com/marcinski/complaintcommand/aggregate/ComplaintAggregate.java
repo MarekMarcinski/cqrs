@@ -20,7 +20,7 @@ public class ComplaintAggregate extends AggregateRoot {
         raiseEvent(ComplaintCreatedEvent.builder()
                 .id(command.getId())
                 .reporterName(command.getReporterName())
-                .complaintProductId(command.getComplaintProductId())
+                .complaintProductId(UUID.fromString(command.getComplaintProductId()))
                 .createdDate(LocalDate.now())
                 .ipAddress(command.getIpAddress())
                 .contents(command.getContents())

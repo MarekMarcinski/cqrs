@@ -4,6 +4,7 @@ import com.marcinski.complaintcommand.api.dto.BaseResponse;
 import com.marcinski.complaintcommand.infrastructure.command.CreateComplaintCommand;
 import com.marcinski.complaintcommand.infrastructure.handler.CommandDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -24,7 +25,7 @@ public class CreateComplaintController {
     private final CommandDispatcher commandDispatcher;
 
     @PostMapping
-    public ResponseEntity<BaseResponse> createComplaint(@RequestBody CreateComplaintCommand command,
+    public ResponseEntity<BaseResponse> createComplaint(@Valid @RequestBody CreateComplaintCommand command,
                                                         HttpServletRequest httpServletRequest) {
         var productId = command.getComplaintProductId().toString();
         var reporterName = command.getReporterName();
