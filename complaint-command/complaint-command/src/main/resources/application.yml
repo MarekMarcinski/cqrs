@@ -1,0 +1,21 @@
+spring:
+  application.name: complaint-command
+  jackson:
+    serialization:
+      write-dates-as-timestamps: true
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: complaint
+      username: root
+      password: rootpassword
+      authentication-database: admin
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: com.marcinski.complaintcommand.config.MyKafkaValueSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+server:
+  port: 2138

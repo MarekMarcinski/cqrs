@@ -1,0 +1,15 @@
+POST http://localhost:2138/api/v1/complaints
+Content-Type: application/json
+
+{
+  "reporterName": "Jareksdfgdfgdf",
+  "complaintProductId": "d2f1e3ad-74e0-4d08-b1f7-3a7e20469efc"
+}
+
+###
+PUT http://localhost:2138/api/v1/complaints/d2cfc938-5781-390e-b2af-621a86a35983
+Content-Type: application/json
+
+{
+  "contents": "Nowa tresc"
+}

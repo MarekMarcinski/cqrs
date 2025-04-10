@@ -1,0 +1,6 @@
+GET http://localhost:2137/api/v1/complaints
+Content-Type: application/json
+
+###
+GET http://localhost:2137/api/v1/complaints/10e8059d-7399-39ad-8f11-b759e4149d41
+Content-Type: application/json

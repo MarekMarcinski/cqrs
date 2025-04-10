@@ -1,0 +1,28 @@
+spring:
+  application.name: complaint-query
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://localhost:3306/complaint?createDatabaseIfNotExist=true
+    username: root
+    password: rootpassword
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  kafka:
+    listener:
+      ack-mode: MANUAL_IMMEDIATE
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: complaint-consumer
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: com.marcinski.complaintquery.config.MultiTypeKafkaDeserializer
+      properties:
+        spring.json:
+          value.default.type: com.marcinski.complaintquery.event.ComplaintCreatedEvent
+          #          use.type.headers: false
+          trusted.packages: "*"
+server:
+  port: 2137
