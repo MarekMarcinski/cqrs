@@ -2,8 +2,9 @@ POST http://localhost:2138/api/v1/complaints
 Content-Type: application/json
 
 {
-  "reporterName": "Jareksdfgdfgdf",
-  "complaintProductId": "d2f1e3ad-74e0-4d08-b1f7-3a7e20469efc"
+  "reporterName": "Jarekaasdfaasgddfdffgdf",
+  "complaintProductId": "d2f1e3ad-74e0-4d08-b1f7-3a7e20469efc",
+  "contents": "dupajas"
 }
 
 ###

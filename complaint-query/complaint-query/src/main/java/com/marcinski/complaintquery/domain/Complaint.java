@@ -17,9 +17,6 @@ import java.util.UUID;
         @UniqueConstraint(columnNames = {"complaintProductId", "reporterName"}, name = "uk_complaint_product_reporter")
 })
 @Data // Includes @Getter, @Setter, @ToString, @EqualsAndHashCode, @RequiredArgsConstructor
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Complaint {
 
     @Id

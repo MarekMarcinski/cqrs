@@ -16,6 +16,7 @@ import java.util.UUID;
 class ComplaintEventHandler {
 
     private final ComplaintRepository complaintRepository;
+    private final ComplaintCommandMapper complaintCommandMapper;
     private final CityLocator cityLocator;
 
     void on(ComplaintCreatedEvent event) {
@@ -27,15 +28,7 @@ class ComplaintEventHandler {
             complaint.incrementCounter();
         } else {
             String country = cityLocator.getCityByIp(event.getIpAddress());
-            complaint = Complaint.builder()
-                    .id(id)
-                    .creationDate(event.getCreatedDate())
-                    .complaintProductId(event.getComplaintProductId())
-                    .reporterName(event.getReporterName())
-                    .contents(event.getContents())
-                    .country(country)
-                    .reportCounter(1)
-                    .build();
+            complaint = complaintCommandMapper.map(event, country);
         }
         complaintRepository.save(complaint);
     }

@@ -9,7 +9,6 @@ import java.util.UUID;
 
 @Data
 @NoArgsConstructor
-@SuperBuilder
 public class ComplaintCreatedEvent extends BaseEvent {
     private UUID complaintProductId;
     private String contents;
