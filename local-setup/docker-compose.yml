@@ -11,10 +11,13 @@ services:
       - zookeeper
     ports:
       - "9092:9092"
+      - "29092:29092"
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092,PLAINTEXT_HOST://0.0.0.0:29092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
   mongodb:
@@ -40,6 +43,27 @@ services:
       - MYSQL_PASSWORD=userpassword
     volumes:
       - mysql_data:/var/lib/mysql
+  complaint-command:
+    build:
+      context: ../complaint-command/complaint-command # This assumes Dockerfile is in the root of your project
+    ports:
+      - "2138:2138"
+    depends_on:
+      - kafka
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongodb
+      SPRING_KAFKA_PRODUCER_BOOTSTRAP_SERVERS: kafka:9092
+  complaint-query:
+    build:
+      context: ../complaint-query/complaint-query # This assumes Dockerfile is in the root of your project
+    ports:
+      - "2137:2137"
+    depends_on:
+      - mysql
+      - complaint-command
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/complaint?createDatabaseIfNotExist=true
+      SPRING_KAFKA_CONSUMER_BOOTSTRAP_SERVERS: kafka:9092
 
 volumes:
   mongodb_data:
