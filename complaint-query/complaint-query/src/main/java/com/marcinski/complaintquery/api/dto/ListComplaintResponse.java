@@ -1,8 +1,7 @@
 package com.marcinski.complaintquery.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonValue;
+import org.springframework.data.domain.Page;
 
-import java.util.List;
-
-public record ListComplaintResponse(@JsonValue List<ComplaintResponse> complaintResponses) {
+public record ListComplaintResponse(@JsonValue Page<ComplaintResponse> complaintResponses) {
 }

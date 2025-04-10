@@ -6,6 +6,8 @@ import com.marcinski.complaintquery.domain.Complaint;
 import com.marcinski.complaintquery.infrastructure.handler.QueryDispatcher;
 import com.marcinski.complaintquery.infrastructure.query.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,11 +24,12 @@ public class ComplaintQueryFacade {
 
     public ListComplaintResponse getAllComplaints(FindAllComplaintQuery query) {
         ListComplaintQueryResponse response = (ListComplaintQueryResponse) queryDispatcher.send(query);
-        List<ComplaintResponse> list = response.getComplaints()
+        Page<Complaint> complaintPage = response.getComplaints();
+        List<ComplaintResponse> list = complaintPage
                 .stream()
                 .map(mapper::map)
                 .toList();
-        return new ListComplaintResponse(list);
+        return new ListComplaintResponse(new PageImpl<>(list, complaintPage.getPageable(), complaintPage.getTotalElements()));
     }
 
     public ComplaintResponse getComplaintById(FindComplaintByIdQuery query) {

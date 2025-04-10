@@ -1,4 +1,4 @@
-GET http://localhost:2137/api/v1/complaints
+GET http://localhost:2137/api/v1/complaints?page=0&size=5&sort=reportCounter,asc
 Content-Type: application/json
 
 ###
